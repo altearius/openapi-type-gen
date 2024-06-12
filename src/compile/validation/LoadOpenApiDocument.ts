@@ -12,7 +12,13 @@ export default async function LoadOpenApiDocument(
 	const cwd = dirname(rootPath) + sep;
 
 	try {
-		return (await dereference(cwd + '/', schema, {})) as OpenAPIV3_1.Document;
+		const result: OpenAPIV3_1.Document = await dereference(
+			cwd + '/',
+			schema,
+			{}
+		);
+
+		return result;
 	} catch (ex: unknown) {
 		if (!(ex instanceof Error)) {
 			throw ex;

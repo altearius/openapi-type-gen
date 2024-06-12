@@ -16,4 +16,5 @@ if (compiled !== 0) {
 	process.exit(compiled);
 }
 
-await chmod(resolve('dist', 'openapi-type-gen.js'), 0o755);
+const executable = 0o755;
+await chmod(resolve('dist', 'openapi-type-gen.js'), executable);
