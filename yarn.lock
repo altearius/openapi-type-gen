@@ -40,6 +40,8 @@ __metadata:
     tslib: "npm:^2.6.3"
     typescript: "npm:^5.4.5"
     typescript-eslint: "npm:^7.13.0"
+  bin:
+    openapi-type-gen: ./dist/openapi-type-gen.js
   languageName: unknown
   linkType: soft
 
