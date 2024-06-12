@@ -1,4 +1,4 @@
-import c from 'ansi-colors';
+import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import { OpenAPIV3 } from 'openapi-types';
 import ExtractPathParameterSchema from './ExtractPathParameterSchema.js';
@@ -18,7 +18,7 @@ export default function* LoadSchemas(doc: OpenAPIV3_1.Document) {
 				continue;
 			}
 
-			const human = c.yellowBright(`${verb.toUpperCase()}: ${name}`);
+			const human = styleText('yellowBright', `${verb.toUpperCase()}: ${name}`);
 			const requestBodySchema = ExtractRequestBodySchema(operation, human);
 
 			if (requestBodySchema && !ids.has(requestBodySchema.$id)) {

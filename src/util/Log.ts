@@ -1,5 +1,5 @@
-import c from 'ansi-colors';
 import { YAMLException } from 'js-yaml';
+import { styleText } from 'node:util';
 import HumanPath from './HumanPath.js';
 
 function error(yamlException: YAMLException): void;
@@ -16,22 +16,22 @@ function error(...messages: unknown[]) {
 		}
 	}
 
-	console.error(c.redBright('✖'), ...messages);
+	console.error(styleText('redBright', '✖'), ...messages);
 }
 
 const Log = {
 	debug: (...messages: unknown[]) => {
 		if (Log.verbose) {
-			console.debug(c.gray('⚙'), ...messages);
+			console.debug(styleText('gray', '⚙'), ...messages);
 		}
 	},
 	error,
 	info: (...messages: unknown[]) => {
-		console.log(c.blueBright('ℹ'), ...messages);
+		console.log(styleText('blueBright', 'ℹ'), ...messages);
 	},
 	verbose: false,
 	warn: (...messages: unknown[]) => {
-		console.warn(c.yellowBright('⚠'), ...messages);
+		console.warn(styleText('yellowBright', '⚠'), ...messages);
 	}
 };
 

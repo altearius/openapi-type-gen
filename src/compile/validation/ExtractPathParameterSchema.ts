@@ -1,4 +1,4 @@
-import c from 'ansi-colors';
+import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import Log from '../../util/Log.js';
 import CollectParameters from './CollectParameters.js';
@@ -23,11 +23,16 @@ export default function ExtractPathParameterSchema(
 	);
 
 	if (parameters.size === 0) {
-		Log.debug(human, c.grey('has no path parameters'));
+		Log.debug(human, styleText('grey', 'has no path parameters'));
 		return;
 	}
 
-	Log.debug(human, 'has a', c.yellowBright('path parameter'), 'schema');
+	Log.debug(
+		human,
+		'has a',
+		styleText('yellowBright', 'path parameter'),
+		'schema'
+	);
 
 	return {
 		...SortParameters(parameters),

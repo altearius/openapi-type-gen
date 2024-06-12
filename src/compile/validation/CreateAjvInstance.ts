@@ -1,5 +1,5 @@
 import { Ajv } from 'ajv';
-import c from 'ansi-colors';
+import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import Log from '../../util/Log.js';
 import LoadSchemas from './LoadSchemas.js';
@@ -32,9 +32,9 @@ export default function CreateAjvInstance(
 			if (reason && '$id' in schema) {
 				Log.error(
 					'Schema',
-					c.yellowBright(schema.$id),
+					styleText('yellowBright', schema.$id),
 					'is invalid:',
-					c.yellowBright(reason)
+					styleText('yellowBright', reason)
 				);
 
 				return;

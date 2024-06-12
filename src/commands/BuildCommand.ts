@@ -1,7 +1,7 @@
 import type $RefParser from '@apidevtools/json-schema-ref-parser';
-import c from 'ansi-colors';
 import { Argument, Command } from 'commander';
 import { YAMLException } from 'js-yaml';
+import { styleText } from 'node:util';
 import type { OpenAPI3 } from 'openapi-typescript';
 import CompileRoot from '../compile/root/CompileRoot.js';
 import CompileTypes from '../compile/types/CompileTypes.js';
@@ -88,18 +88,18 @@ function logCompletion(
 		'Compiled',
 		HumanPath(paths.templatePath),
 		'in',
-		c.yellowBright(`${diff.toLocaleString()}ms`),
-		`to:\n\t${c.greenBright('Schema')}:     `,
+		styleText('yellowBright', `${diff.toLocaleString()}ms`),
+		`to:\n\t${styleText('greenBright', 'Schema')}:     `,
 		HumanPath(paths.rootPath)
 	];
 
 	if (types) {
-		msgs.push(`\n\t${c.greenBright('Definitions:')}`);
+		msgs.push(`\n\t${styleText('greenBright', 'Definitions:')}`);
 		msgs.push(HumanPath(paths.typesPath));
 	}
 
 	if (validation) {
-		msgs.push(`\n\t${c.greenBright('Validation: ')}`);
+		msgs.push(`\n\t${styleText('greenBright', 'Validation: ')}`);
 		msgs.push(HumanPath(paths.validationPath));
 	}
 
