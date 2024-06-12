@@ -21,7 +21,8 @@
   "packageManager": "yarn@4.3.0",
   "scripts": {
     "build": "node ./build/build.js",
-    "clean": "node ./build/clean.js"
+    "clean": "node ./build/clean.js",
+    "pretty": "prettier . --write"
   },
   "type": "module",
   "version": "1.0.0"
