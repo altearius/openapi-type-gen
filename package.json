@@ -1,4 +1,5 @@
 {
+  "author": "Chris Nielsen <nielsen.chris@gmail.com>",
   "bin": "./dist/openapi-type-gen.js",
   "dependencies": {
     "@altearius/openapi-compose": "^1.0.3",
