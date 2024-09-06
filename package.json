@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "name": "@altearius/openapi-type-gen",
-  "packageManager": "yarn@4.3.0",
+  "packageManager": "yarn@4.4.1",
   "scripts": {
     "build": "node ./build/build.js",
     "clean": "node ./build/clean.js",
