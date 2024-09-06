@@ -1,5 +1,5 @@
 import { Ajv } from 'ajv';
-import addFormats from "ajv-formats";
+import addFormats from 'ajv-formats';
 import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import Log from '../../util/Log.js';
