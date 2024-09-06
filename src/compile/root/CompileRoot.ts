@@ -2,6 +2,7 @@ import { Compose } from '@altearius/openapi-compose';
 import yaml from 'js-yaml';
 import { writeFile } from 'node:fs/promises';
 import { format } from 'prettier';
+import Log from '../../util/Log.js';
 import ResolveConfig from '../ResolveConfig.js';
 
 export default async function CompileRoot(
@@ -9,7 +10,7 @@ export default async function CompileRoot(
 	targetPath: string,
 	fast: boolean
 ) {
-	const schema = await Compose(templatePath, targetPath);
+	const schema = await Compose(templatePath, targetPath, Log);
 	if (!schema) {
 		return;
 	}
