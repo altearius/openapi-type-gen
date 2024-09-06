@@ -1,6 +1,6 @@
 import { dirname, sep } from 'node:path';
 import type { OpenAPI3, OpenAPITSOptions } from 'openapi-typescript';
-import openapiTS from 'openapi-typescript';
+import openapiTS, { astToString } from 'openapi-typescript';
 import HumanPath from '../../util/HumanPath.js';
 import Log from '../../util/Log.js';
 
@@ -12,11 +12,12 @@ export default async function TryCompile(
 	const typeOptions: OpenAPITSOptions = {
 		alphabetize: !fast,
 		cwd: dirname(rootPath) + sep,
-		immutableTypes: true
+		immutable: true
 	};
 
 	try {
-		return await openapiTS(schema, typeOptions);
+		const ast = await openapiTS(schema, typeOptions);
+		return astToString(ast);
 	} catch (ex: unknown) {
 		if (ex instanceof Error) {
 			if (
