@@ -5,17 +5,17 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@altearius/openapi-compose@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@altearius/openapi-compose@npm:1.0.3"
+"@altearius/openapi-compose@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@altearius/openapi-compose@npm:1.0.4"
   dependencies:
-    commander: "npm:^12.0.0"
+    commander: "npm:^12.1.0"
     fast-glob: "npm:^3.3.2"
     js-yaml: "npm:^4.1.0"
-    tslib: "npm:^2.6.2"
+    tslib: "npm:^2.7.0"
   bin:
     openapi-compose: ./dist/openapi-compose/cli/openapi-compose.js
-  checksum: 10c0/ea9080835abd4fad76a1ce212e1e6e3247a895c7b18056d53385d993ccbe8143015e206398415fa84a3402d1cc66279daf31e4fe599fc112a9f1fdc33b48edb3
+  checksum: 10c0/8ecd8edb6c844fa1f6fffe765f7861edf5bb4f402c4500d06f642998f7f45445712a6d702e43b1c0a7ecc9df1a601708599ff84e53d3debe325b8c6c1caec6b9
   languageName: node
   linkType: hard
 
@@ -23,7 +23,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@altearius/openapi-type-gen@workspace:."
   dependencies:
-    "@altearius/openapi-compose": "npm:^1.0.3"
+    "@altearius/openapi-compose": "npm:^1.0.4"
     "@apidevtools/json-schema-ref-parser": "npm:^11.7.0"
     "@eslint/js": "npm:^9.9.1"
     "@types/js-yaml": "npm:^4.0.9"
@@ -585,7 +585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^12.0.0, commander@npm:^12.1.0":
+"commander@npm:^12.1.0":
   version: 12.1.0
   resolution: "commander@npm:12.1.0"
   checksum: 10c0/6e1996680c083b3b897bfc1cfe1c58dfbcd9842fd43e1aaf8a795fbc237f65efcc860a3ef457b318e73f29a4f4a28f6403c3d653d021d960e4632dd45bde54a9
@@ -1460,13 +1460,6 @@ __metadata:
   peerDependencies:
     typescript: ">=4.2.0"
   checksum: 10c0/f54a0ba9ed56ce66baea90a3fa087a484002e807f28a8ccb2d070c75e76bde64bd0f6dce98b3802834156306050871b67eec325cb4e918015a360a3f0868c77c
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.6.2":
-  version: 2.6.3
-  resolution: "tslib@npm:2.6.3"
-  checksum: 10c0/2598aef53d9dbe711af75522464b2104724d6467b26a60f2bdac8297d2b5f1f6b86a71f61717384aa8fd897240467aaa7bcc36a0700a0faf751293d1331db39a
   languageName: node
   linkType: hard
 

@@ -2,7 +2,7 @@
   "author": "Chris Nielsen <nielsen.chris@gmail.com>",
   "bin": "./dist/openapi-type-gen.js",
   "dependencies": {
-    "@altearius/openapi-compose": "^1.0.3",
+    "@altearius/openapi-compose": "^1.0.4",
     "@apidevtools/json-schema-ref-parser": "^11.7.0",
     "ajv": "^8.17.1",
     "commander": "^12.1.0",

@@ -1,4 +1,3 @@
-import { dirname, sep } from 'node:path';
 import type { OpenAPI3, OpenAPITSOptions } from 'openapi-typescript';
 import openapiTS, { astToString } from 'openapi-typescript';
 import HumanPath from '../../util/HumanPath.js';
@@ -11,13 +10,14 @@ export default async function TryCompile(
 ) {
 	const typeOptions: OpenAPITSOptions = {
 		alphabetize: !fast,
-		cwd: dirname(rootPath) + sep,
+		cwd: rootPath,
 		immutable: true
 	};
 
+	let ast: Awaited<ReturnType<typeof openapiTS>>;
+
 	try {
-		const ast = await openapiTS(schema, typeOptions);
-		return astToString(ast);
+		ast = await openapiTS(schema, typeOptions);
 	} catch (ex: unknown) {
 		if (ex instanceof Error) {
 			if (
@@ -36,4 +36,6 @@ export default async function TryCompile(
 		Log.error('Failed to compile:', ex);
 		throw new Error('Failed to compile');
 	}
+
+	return astToString(ast);
 }
