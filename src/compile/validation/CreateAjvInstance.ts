@@ -13,7 +13,7 @@ export default function CreateAjvInstance(
 	const optimize = fast ? false : optimizationPasses;
 
 	const ajv = new Ajv({
-		code: { esm: true, optimize, source: true },
+		code: { esm: false, optimize, source: true },
 		strict: true
 	});
 

@@ -12,7 +12,7 @@ export default function ResolvePaths(rawTemplatePath: string) {
 
 	const rootPath = resolve(templateDir, `${name}.yaml`);
 	const typesPath = resolve(templateDir, `${name}.d.yaml.ts`);
-	const validationPath = resolve(templateDir, `${name}.validation.js`);
+	const validationPath = resolve(templateDir, `${name}.validation.cjs`);
 
 	return {
 		rootPath,

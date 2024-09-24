@@ -4,9 +4,7 @@ import { writeFile } from 'node:fs/promises';
 import { format } from 'prettier';
 import ResolveConfig from '../ResolveConfig.js';
 import CreateAjvInstance from './CreateAjvInstance.js';
-import EnsureModule from './EnsureModule.js';
 import LoadOpenApiDocument from './LoadOpenApiDocument.js';
-import TransformCjsToEsm from './TransformCjsToEsm.js';
 
 export default async function CompileValidation(
 	schema: $RefParser.JSONSchema,
@@ -29,14 +27,12 @@ export default async function CompileValidation(
 	}
 
 	const validationCode = standaloneCode.default(ajv);
-	const transformed = TransformCjsToEsm(validationCode);
-	const ensureModule = EnsureModule(transformed);
 
 	if (fast) {
-		return async () => writeFile(target, ensureModule, 'utf-8');
+		return async () => writeFile(target, validationCode, 'utf-8');
 	}
 
-	const formatted = await format(ensureModule, {
+	const formatted = await format(validationCode, {
 		...config,
 		parser: 'typescript'
 	});
