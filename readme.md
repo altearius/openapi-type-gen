@@ -14,9 +14,7 @@ This project is responsible for these tasks:
 - Generate validation functions for the generated types. This tool works by
   extracting various schemas from within the OpenAPI specification and passing
   them into `ajv` to generate validation functions. A set of default
-  configuration options are provided. Minor adjustments are made to the
-  resulting validation functions to ensure they can be loaded in an
-  ESM environment.
+  configuration options are provided.
 
 ## Usage
 
