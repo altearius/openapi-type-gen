@@ -1,8 +1,8 @@
 import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import { OpenAPIV3 } from 'openapi-types';
-import ExtractPathParameterSchema from './ExtractPathParameterSchema.js';
-import ExtractRequestBodySchema from './ExtractRequestBodySchema.js';
+import request from './extract-schema/request.js';
+import requestBody from './extract-schema/requestBody.js';
 
 export default function* LoadSchemas(doc: OpenAPIV3_1.Document) {
 	const ids = new Set<string>();
@@ -19,22 +19,18 @@ export default function* LoadSchemas(doc: OpenAPIV3_1.Document) {
 			}
 
 			const human = styleText('yellowBright', `${verb.toUpperCase()}: ${name}`);
-			const requestBodySchema = ExtractRequestBodySchema(operation, human);
+			const requestBodySchema = requestBody(human, operation);
 
 			if (requestBodySchema && !ids.has(requestBodySchema.$id)) {
 				ids.add(requestBodySchema.$id);
 				yield requestBodySchema;
 			}
 
-			const pathParameterSchema = ExtractPathParameterSchema(
-				pathItem,
-				operation,
-				human
-			);
+			const requestSchema = request(human, pathItem, operation);
 
-			if (pathParameterSchema && !ids.has(pathParameterSchema.$id)) {
-				ids.add(pathParameterSchema.$id);
-				yield pathParameterSchema;
+			if (requestSchema && !ids.has(requestSchema.$id)) {
+				ids.add(requestSchema.$id);
+				yield requestSchema;
 			}
 		}
 	}

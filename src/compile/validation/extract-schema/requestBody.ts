@@ -1,24 +1,24 @@
 import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
-import Log from '../../util/Log.js';
-import type ISchemaWithId from './ISchemaWithId.js';
-import IsSchemaWithId from './IsSchemaWithId.js';
+import Log from '../../../util/Log.js';
+import type SchemaWithId from '../SchemaWithId.js';
+import { isSchemaWithId } from '../SchemaWithId.js';
 
-export default function ExtractRequestBodySchema(
-	{ requestBody }: OpenAPIV3_1.OperationObject,
-	human: string
-): ISchemaWithId | undefined {
-	if (requestBody === undefined) {
+export default function requestBody(
+	human: string,
+	{ requestBody: definition }: Pick<OpenAPIV3_1.OperationObject, 'requestBody'>
+): SchemaWithId | undefined {
+	if (definition === undefined) {
 		Log.debug(human, styleText('grey', 'has no requestBody.'));
 		return;
 	}
 
-	if (!('content' in requestBody)) {
+	if (!('content' in definition)) {
 		Log.debug(human, styleText('grey', 'has no content.'));
 		return;
 	}
 
-	const schema = requestBody.content['application/json']?.schema;
+	const schema = definition.content['application/json']?.schema;
 
 	if (schema === undefined) {
 		Log.debug(human, styleText('grey', 'has no JSON schema.'));
@@ -30,7 +30,7 @@ export default function ExtractRequestBodySchema(
 		return;
 	}
 
-	if (!IsSchemaWithId(schema)) {
+	if (!isSchemaWithId(schema)) {
 		Log.warn(human, 'has no $id.');
 		return;
 	}
