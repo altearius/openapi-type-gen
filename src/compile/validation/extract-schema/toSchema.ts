@@ -1,14 +1,5 @@
 import type { SchemaObject } from 'ajv';
 
-export default function toSchema(
-	group: ReadonlyMap<string, SchemaObject>
-): SchemaObject;
-
-export default function toSchema<TValue>(
-	group: ReadonlyMap<string, TValue>,
-	mapValue: (value: TValue) => SchemaObject
-): SchemaObject;
-
 export default function toSchema<TValue>(
 	group: ReadonlyMap<string, TValue>,
 	mapValue?: (value: TValue) => SchemaObject
@@ -22,7 +13,6 @@ export default function toSchema<TValue>(
 	}
 
 	return {
-		additionalProperties: false,
 		properties,
 		required: sortedKeys,
 		type: 'object' as const

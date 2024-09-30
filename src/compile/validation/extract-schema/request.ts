@@ -1,3 +1,4 @@
+import type { SchemaObject } from 'ajv';
 import { styleText } from 'node:util';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import Log from '../../../util/Log.js';
@@ -26,8 +27,45 @@ export default function request(
 
 	Log.debug(human, 'has a', styleText('yellowBright', 'request'), 'schema');
 
+	const schema = toSchema(grouped, (location) => toSchema(location));
+	return configureSchema(operationId, schema);
+}
+
+function configureSchema(
+	operationId: string,
+	schema: SchemaObject
+): SchemaWithId {
+	if (!('properties' in schema)) {
+		throw new Error('Expected schema to have properties');
+	}
+
+	const properties: unknown = schema.properties;
+
+	if (properties === null) {
+		throw new Error('Expected properties to have a value');
+	}
+
+	if (typeof properties !== 'object') {
+		throw new Error('Expected properties to be an object');
+	}
+
 	return {
-		...toSchema(grouped, (location) => toSchema(location)),
-		$id: `${operationId.replace(/[^\w]/giu, '_')}_request_parameters`
+		...schema,
+		$id: `${operationId.replace(/[^\w]/giu, '_')}_request_parameters`,
+		additionalProperties: false,
+		properties: configureProperties(properties as Record<string, unknown>)
 	};
+}
+
+function configureProperties(properties: Record<string, unknown>) {
+	return Object.fromEntries(
+		Object.entries(properties).map(([key, value]) => {
+			if (typeof value !== 'object') {
+				throw new Error('Expected value to be an object');
+			}
+
+			const additionalProperties = key !== 'path';
+			return [key, { ...value, additionalProperties }];
+		})
+	);
 }
