@@ -1,5 +1,6 @@
 import type { OpenAPI3, OpenAPITSOptions } from 'openapi-typescript';
 import openapiTS, { astToString } from 'openapi-typescript';
+import { factory } from 'typescript';
 import HumanPath from '../../util/HumanPath.js';
 import Log from '../../util/Log.js';
 
@@ -11,7 +12,32 @@ export default async function TryCompile(
 	const typeOptions: OpenAPITSOptions = {
 		alphabetize: !fast,
 		cwd: rootPath,
-		immutable: true
+		immutable: true,
+		// See https://github.com/openapi-ts/openapi-typescript/issues/1214
+		transform({ format, nullable }, { path }) {
+			if (format !== 'binary' || !path) {
+				return;
+			}
+
+			const typeName = path.includes('multipart~1form-data')
+				? 'File'
+				: path.includes('application~1octet-stream')
+					? 'Blob'
+					: null;
+
+			if (!typeName) {
+				return;
+			}
+
+			const node = factory.createTypeReferenceNode(typeName);
+
+			return nullable
+				? factory.createUnionTypeNode([
+						node,
+						factory.createTypeReferenceNode('null')
+					])
+				: node;
+		}
 	};
 
 	let ast: Awaited<ReturnType<typeof openapiTS>>;
