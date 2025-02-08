@@ -1,4 +1,3 @@
-import type $RefParser from '@apidevtools/json-schema-ref-parser';
 import standaloneCode from 'ajv/dist/standalone/index.js';
 import { writeFile } from 'node:fs/promises';
 import { format } from 'prettier';
@@ -7,7 +6,7 @@ import CreateAjvInstance from './CreateAjvInstance.js';
 import LoadOpenApiDocument from './LoadOpenApiDocument.js';
 
 export default async function CompileValidation(
-	schema: $RefParser.JSONSchema,
+	schema: unknown,
 	rootPath: string,
 	target: string,
 	fast: boolean

@@ -1,4 +1,3 @@
-import type $RefParser from '@apidevtools/json-schema-ref-parser';
 import { Argument, Command } from 'commander';
 import { YAMLException } from 'js-yaml';
 import { styleText } from 'node:util';
@@ -135,12 +134,7 @@ async function tryCompileValidation(
 	}
 
 	try {
-		return await CompileValidation(
-			schema as $RefParser.JSONSchema,
-			rootPath,
-			validationPath,
-			fast
-		);
+		return await CompileValidation(schema, rootPath, validationPath, fast);
 	} catch (ex: unknown) {
 		Log.error(
 			'Failed to compile validation:',
