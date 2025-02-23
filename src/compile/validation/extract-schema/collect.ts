@@ -16,7 +16,7 @@ export default function* collect(
 				throw new Error('Parameter sources must be dereferenced first.');
 			}
 
-			const { in: location, name, schema } = obj;
+			const { in: location, name, required = false, schema } = obj;
 			if (schema === undefined) {
 				continue;
 			}
@@ -29,7 +29,7 @@ export default function* collect(
 				throw new Error('Invalid parameter location.');
 			}
 
-			yield { location, name, schema };
+			yield { location, name, required, schema };
 		}
 	}
 }

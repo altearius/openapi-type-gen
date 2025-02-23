@@ -27,7 +27,7 @@ export default function request(
 
 	Log.debug(human, 'has a', styleText('yellowBright', 'request'), 'schema');
 
-	const schema = toSchema(grouped, (location) => toSchema(location));
+	const schema = toSchema(grouped);
 	return configureSchema(operationId, schema);
 }
 

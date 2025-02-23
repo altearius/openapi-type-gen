@@ -1,4 +1,3 @@
-import type { SchemaObject } from 'ajv';
 import { styleText } from 'node:util';
 import Log from '../../../util/Log.js';
 import type Parameter from './Parameter.js';
@@ -7,14 +6,13 @@ import type ParameterLocation from './ParameterLocation.js';
 export default function groupByLocation(
 	human: string,
 	parameters: Generator<Parameter>
-): ReadonlyMap<ParameterLocation, ReadonlyMap<string, SchemaObject>> {
-	type NamedSchema = Map<string, SchemaObject>;
-	const groups = new Map<ParameterLocation, NamedSchema>();
+): ReadonlyMap<ParameterLocation, ReadonlyMap<string, Parameter>> {
+	const groups = new Map<ParameterLocation, Map<string, Parameter>>();
 
 	for (const parameter of parameters) {
 		let group = groups.get(parameter.location);
 		if (!group) {
-			group = new Map<string, SchemaObject>();
+			group = new Map<string, Parameter>();
 			groups.set(parameter.location, group);
 		}
 
@@ -31,7 +29,7 @@ export default function groupByLocation(
 			continue;
 		}
 
-		group.set(parameter.name, parameter.schema);
+		group.set(parameter.name, parameter);
 	}
 
 	return groups;
