@@ -1,6 +1,5 @@
 import type { SchemaObject } from 'ajv';
 import type groupByLocation from './groupByLocation.js';
-import type Parameter from './Parameter.js';
 import type ParameterLocation from './ParameterLocation.js';
 
 export default function toSchema(
@@ -11,10 +10,9 @@ export default function toSchema(
 
 	for (const [location, parameters] of sortedEntries(group)) {
 		const locationProperties: Record<string, SchemaObject> = {};
-		const y = new Map<string, Parameter>(Object.entries(parameters));
 		const locationRequired: string[] = [];
 
-		for (const [name, parameter] of sortedEntries(y)) {
+		for (const [name, parameter] of sortedEntries(parameters)) {
 			if (Object.keys(parameter.schema).length === 0) {
 				continue;
 			}
