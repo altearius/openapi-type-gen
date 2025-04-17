@@ -3,29 +3,29 @@
   "bin": "./dist/openapi-type-gen.js",
   "dependencies": {
     "@altearius/openapi-compose": "^1.0.4",
-    "@apidevtools/json-schema-ref-parser": "^11.9.1",
+    "@apidevtools/json-schema-ref-parser": "^12.0.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "commander": "^13.1.0",
     "js-yaml": "^4.1.0",
     "openapi-types": "^12.1.3",
     "openapi-typescript": "^7.6.1",
-    "prettier": "^3.5.2",
+    "prettier": "^3.5.3",
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^9.24.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^22.13.5",
-    "eslint": "^9.21.0",
-    "eslint-config-prettier": "^10.0.1",
+    "@types/node": "^22.14.1",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
     "globals": "^16.0.0",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.1"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
   },
   "license": "MIT",
   "name": "@altearius/openapi-type-gen",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.9.1",
   "scripts": {
     "build": "node ./build/build.js",
     "clean": "node ./build/clean.js",
@@ -33,5 +33,5 @@
     "pretty": "prettier . --write"
   },
   "type": "module",
-  "version": "0.3.3"
+  "version": "0.3.4"
 }
